@@ -105,7 +105,7 @@ const bookController = {
             const email = req.body.email;
         
             
-            const queri = `INSERT INTO users (username, password, nama, no_hp, email) VALUE ('${username}', '${password}', '${name}', '${number}', '${email}')`
+            const queri = `INSERT INTO users (username, password, nama, no_hp, email) VALUES ('${username}', '${password}', '${name}', '${number}', '${email}')`
             //console.log(queri)
             const result = await pool.query(queri);
             //console.log(result)
