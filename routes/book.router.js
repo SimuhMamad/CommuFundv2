@@ -9,6 +9,8 @@ const bookController = require('../controllers/book.controller')
 // router.put("/:id", bookController.updateById)
 // router.delete("/:id", bookController.deleteById)
 
+router.get("/", bookController.getUsers)
 router.post("/postPass", bookController.checkUser)
+router.post("/postRegis", bookController.insertUser)
 
 module.exports = router

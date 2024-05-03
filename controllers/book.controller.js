@@ -66,6 +66,15 @@ const bookController = {
             res.json({msg: error.msg})
         }
     },
+
+    getUsers: async(req, res) => {
+        try {
+            const { rows } = await postgre.query("select * from Users")
+            res.json({msg: "OK", data: rows})
+        } catch (error) {
+            res.json({msg: error.msg})
+        }
+    },
     checkUser: async(req, res) => {
         try {
             const username = req.body.username
