@@ -8,6 +8,6 @@ app.use(express.json())
 
 const bookRouter = require('./routes/book.router')
 
-app.use("/api/v2/users", bookRouter)
+app.use("/", bookRouter)
 
 app.listen(process.env.PORT, () => console.log("Server is running on port 3000"))
