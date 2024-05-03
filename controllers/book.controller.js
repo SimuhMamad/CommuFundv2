@@ -77,18 +77,19 @@ const bookController = {
     },
     checkUser: async(req, res) => {
         try {
-            const username = req.body.username
-            const password = req.body.password;
+            const username = req.body.name
+            const password = req.body.description;
             
             const queri = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
             console.log(queri)
             const result = await pool.query(queri);
             //console.log(result)
             if (result.rows == 0) {
-              res.json({ text: 'failed' })
+              res.json({ stat: 'failed' })
             }
             else{
-              res.json({ text: 'success' });
+              res.json({ stat: 'success', token: '123456' });
+              res
             }
              // Ensure correct property name
           } catch (error) {
