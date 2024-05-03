@@ -9,7 +9,7 @@ const bookController = require('../controllers/book.controller')
 // router.put("/:id", bookController.updateById)
 // router.delete("/:id", bookController.deleteById)
 
-router.get("/", bookController.getUsers)
+router.get("/get-User", bookController.getUser)
 router.post("/postPass", bookController.checkUser)
 router.post("/postRegis", bookController.insertUser)
 

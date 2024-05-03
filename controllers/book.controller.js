@@ -67,7 +67,7 @@ const bookController = {
         }
     },
 
-    getUsers: async(req, res) => {
+    getUser: async(req, res) => {
         try {
             const { rows } = await postgre.query("select * from Users")
             res.json({msg: "OK", data: rows})
