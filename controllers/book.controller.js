@@ -82,8 +82,8 @@ const bookController = {
             
             const queri = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
             console.log(queri)
-            const result = await pool.query(queri);
-            //console.log(result)
+            const result = await postgre.query(queri);
+            console.log(result)
             if (result.rows == 0) {
               res.json({ stat: 'failed' })
             }
@@ -108,7 +108,7 @@ const bookController = {
             
             const queri = `INSERT INTO users (username, password, nama, no_hp, email) VALUES ('${username}', '${password}', '${name}', '${number}', '${email}')`
             //console.log(queri)
-            const result = await pool.query(queri);
+            const result = await postgre.query(queri);
             //console.log(result)
             response.send("Registrasi berhasil")
              // Ensure correct property name

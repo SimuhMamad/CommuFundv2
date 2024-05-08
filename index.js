@@ -10,4 +10,12 @@ const bookRouter = require('./routes/book.router')
 
 app.use("/", bookRouter)
 
+app.get("/", (req, res) => {
+    res.sendFile("./tes_frontend/login.html", {root: __dirname});
+})
+
+app.get("/registrasi.html", (req, res) => {
+    res.sendFile("./tes_frontend/registrasi.html", {root: __dirname});
+})
+
 app.listen(process.env.PORT, () => console.log("Server is running on port 3000"))
