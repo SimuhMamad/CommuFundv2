@@ -83,13 +83,12 @@ const bookController = {
             const queri = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
             console.log(queri)
             const result = await postgre.query(queri);
-            console.log(result)
+            //console.log(result)
             if (result.rows == 0) {
               res.json({ stat: 'failed' })
             }
             else{
               res.json({ stat: 'success', token: '123456' });
-              res
             }
              // Ensure correct property name
           } catch (error) {
@@ -110,11 +109,11 @@ const bookController = {
             //console.log(queri)
             const result = await postgre.query(queri);
             //console.log(result)
-            response.send("Registrasi berhasil")
+            res.send("Registrasi berhasil")
              // Ensure correct property name
           } catch (error) {
             console.error('Error fetching data from database:', error);
-            response.status(500).send('Internal Server Error'); // Send appropriate error response
+            res.status(500).send('Internal Server Error'); // Send appropriate error response
           }
         
     }
