@@ -11,11 +11,11 @@ const bookRouter = require('./routes/book.router')
 app.use("/", bookRouter)
 
 app.get("/", (req, res) => {
-    res.sendFile("/public/login.html", {root: __dirname});
+    res.sendFile("/public/login.html", {root: process.cwd()});
 })
 
 app.get("/registrasi.html", (req, res) => {
     res.sendFile("/public/registrasi.html", {root: __dirname});
 })
 
-app.listen(process.env.PORT, () => console.log("Server is running on port 3000"))
+app.listen(process.env.PORT, () => console.log("Server is running on port 5500"))
