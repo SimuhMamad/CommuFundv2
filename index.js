@@ -11,7 +11,7 @@ const bookRouter = require('./routes/book.router')
 app.use("/", bookRouter)
 
 app.get("/", (req, res) => {
-    res.sendFile("/login.html");
+    res.sendFile("/login.html", {root: __dirname});
 })
 
 app.get("/registrasi.html", (req, res) => {
