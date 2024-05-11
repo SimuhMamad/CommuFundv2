@@ -1,72 +1,5 @@
 const postgre = require('../database')
 const bookController = {
-    getAll: async(req, res) => {
-        try {
-            const { rows } = await postgre.query("select * from books")
-            res.json({msg: "OK", data: rows})
-        } catch (error) {
-            res.json({msg: error.msg})
-        }
-    },
-    getById: async(req, res) => {
-        try {
-            const { rows } = await postgre.query("select * from books where book_id = $1", [req.params.id])
-
-            if (rows[0]) {
-                return res.json({msg: "OK", data: rows})
-            }
-
-            res.status(404).json({msg: "not found"})
-        } catch (error) {
-            res.json({msg: error.msg})
-        }
-    },
-    create: async(req, res) => {
-        try {
-            const { name, price } = req.body
-
-            const sql = 'INSERT INTO books(name, price) VALUES($1, $2) RETURNING *'
-
-            const { rows } = await postgre.query(sql, [name, price])
-
-            res.json({msg: "OK", data: rows[0]})
-
-        } catch (error) {
-            res.json({msg: error.msg})
-        }
-    },
-    updateById: async(req, res) => {
-        try {
-            const { name, price } = req.body
-
-            const sql = 'UPDATE books set name = $1, price = $2 where book_id = $3 RETURNING *'
-
-            const { rows } = await postgre.query(sql, [name, price, req.params.id])
-
-            res.json({msg: "OK", data: rows[0]})
-
-        } catch (error) {
-            res.json({msg: error.msg})
-        }
-    },
-    deleteById: async(req, res) => {
-        try {
-            const sql = 'DELETE FROM books where book_id = $1 RETURNING *'
-
-            const { rows } = await postgre.query(sql, [req.params.id])
-
-            if (rows[0]) {
-                return res.json({msg: "OK", data: rows[0]})
-            }
-
-            return res.status(404).json({msg: "not found"})
-            
-
-        } catch (error) {
-            res.json({msg: error.msg})
-        }
-    },
-
     getUser: async(req, res) => {
         try {
             const { rows } = await postgre.query("select * from Users")
@@ -116,7 +49,60 @@ const bookController = {
             res.status(500).send('Internal Server Error'); // Send appropriate error response
           }
         
-    }
+    },
+
+    insertOrganisasi: async(req, res) => {
+      try {
+          const namaO = req.body.namaO
+          const deskripsiO = req.body.deskripsiO;
+          const nomorReg = req.body.nomorReg;
+          const tglPendirian = req.body.tglPendirian;
+          const alamatO = req.body.alamatO;
+          const stakeholderO = req.body.stakeholderO;
+          
+          
+          const queri = `INSERT INTO Detail_Organisasi (nama_organisasi, deskripsi_organisasi, nomor_registrasi, tanggal_pendirian, alamat_organisasi, stakeholder_organisasi) VALUES 
+                        ('${namaO}', '${deskripsiO}', '${nomorReg}', '${tglPendirian}', '${alamatO}', '${stakeholderO}')`
+          //console.log(queri)
+          const result = await postgre.query(queri);
+          //console.log(result)
+          res.send("Registrasi berhasil")
+           // Ensure correct property name
+        } catch (error) {
+          console.error('Error fetching data from database:', error);
+          res.status(500).send('Internal Server Error'); // Send appropriate error response
+        }
+      
+  },
+
+  insertProyek: async(req, res) => {
+    try {
+        const namaPy = req.body.namaPy
+        const deskripsiPy = req.body.deskripsiPy;
+        
+        const danaPy = req.body.danaPy;
+        const pendaftarPy = req.body.pendaftarPy;
+        const tglawal = req.body.tglawal;
+        const tglakhir = req.body.tglakhir;
+        const nomorRek = req.body.nomorRek;
+        const kategoriPy = req.body.kategoriPy;
+        
+        
+        
+        const queri = `INSERT INTO Detail_Proyek (nama_proyek, deskripsi_proyek, dana_proyek, pendaftar_proyek, tanggal_awal, tanggal_akhir, nomor_rekening, kategori_proyek) VALUES 
+                      ('${namaPy}', '${deskripsiPy}', '${danaPy}', '${pendaftarPy}', '${tglawal}', '${tglakhir}',  '${nomorRek}', '${kategoriPy}')`
+        //console.log(queri)
+        const result = await postgre.query(queri);
+        //console.log(result)
+        res.send("Registrasi berhasil")
+         // Ensure correct property name
+      } catch (error) {
+        console.error('Error fetching data from database:', error);
+        res.status(500).send('Internal Server Error'); // Send appropriate error response
+      }
+    
+  }
+
 }
 
 module.exports = bookController
