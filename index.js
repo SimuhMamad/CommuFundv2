@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/registrasi.html", (req, res) => {
-    res.sendFile("/public/registrasi.html", {root: __dirname});
+    res.sendFile(__dirname + "/public/registrasi.html");
 })
 
 app.listen(process.env.PORT, () => console.log("Server is running on port 5500"))
